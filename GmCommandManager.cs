@@ -1,3 +1,5 @@
+
+#if DebugMod
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -233,3 +235,4 @@ public class GmCommand : IEquatable<GmCommand>
 
     }
 }
+#endif

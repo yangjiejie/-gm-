@@ -8,6 +8,8 @@ using System.Linq;
 using UnityEngine.UI;
 using HotFix.Manager;
 using HotFix.Module.Hall.Dialog.Interface;
+using HotFix.Module.Hall.Personal.Mgr;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -333,11 +335,33 @@ public class GmGui : SingletonMono<GmGui>
 
         }
     }
- 
+    private Rect timePos = new Rect(50, 30, 90, 70);
     private void OnGUI() // 绘制GUI界面的坐标系以屏幕的左上角为（0，0）点”
     {
         if (!isShow) return;
-        InitStyle();
+
+        long serverTimeMs = (long)(PlayerMgr.Instance.ServerTime / 1000);
+
+        // 1. 转换为 DateTimeOffset（UTC）
+        DateTimeOffset utcTime = DateTimeOffset.FromUnixTimeSeconds(serverTimeMs);
+
+        // 2. 转换为本地时间
+        DateTime localTime = utcTime.LocalDateTime;
+
+        // 3. 格式化为 yyyy:MM:dd
+        string formattedDate = localTime.ToString("yyyy:MM:dd");
+
+
+        GUIStyle textFieldStyle = new GUIStyle(GUI.skin.textField);
+
+        // 2. 修改字体大小
+        textFieldStyle.fontSize = 30; // 改成你需要的字号
+
+        // 3. 使用这个样式来绘制 TextField
+         GUI.TextArea(new Rect(10, 10, 300, 30), formattedDate, textFieldStyle);
+       
+
+            InitStyle();
         
 
        

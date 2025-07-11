@@ -1,16 +1,29 @@
-
+#if DebugMod
 using HotFix.Ctrl;
 
 using HotFix.Manager.Net.Socket;
 using HotFix.Manager.Window;
 
 using HotFix.Module.GameBaloot.Interface;
+using HotFix.Module.Hall.Activity.Interface;
 using HotFix.Module.Hall.GoldFinger.Interface;
 using HotFix.Module.Hall.Personal.Mgr;
+using HotFix.Module.Hall.RankMatch.Interface;
 
 public static partial class GMFunc
 {
-    [Gm(2, "打开结算窗口")]
+    [Gm(2, "打开新赛季欢迎")]
+    public static void OpenWelcomeRankMatch()
+    {
+        UIManager.Instance.ShowWindow<UIWelcomeRankMatch>();
+    }
+
+    [Gm(2, "打开破产礼包")]
+    public static void OpenBankRuptPack()
+    {
+        UIManager.Instance.ShowWindow<UIBankruptPack>();
+    }
+        [Gm(2, "打开结算窗口")]
     public static void OpenRankMatchResultUI()
     {
         SCBalootGameSettle data = new SCBalootGameSettle();
@@ -61,3 +74,4 @@ public static partial class GMFunc
         UIManager.Instance.ShowWindow<GameBalootRankMatchResult>(data, true);
     }
 }
+#endif
